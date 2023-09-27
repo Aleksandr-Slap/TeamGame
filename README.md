@@ -1,24 +1,47 @@
-# README
+Ruby version: 3.0.0 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails version: 7.0.8
 
-Things you may want to cover:
+Database: Postgresql
 
-* Ruby version
+Весь необходимый интерфейс - консольный.
+Создаём данные: rails db:seed
+Переходим в консоль: rails c
+Назначаем переменные используемые в методах.
 
-* System dependencies
+player = Player.take
+match = Match.take
 
-* Configuration
+Реализованные методы:
 
-* Database creation
+1. assign_distance и assign_accuracy
 
-* Database initialization
+Реализуют требование: отметить, что игрок выполнил такой-то показатель в матче
 
-* How to run the test suite
+Оба метода принимают два параметра: match_id и (distance или accuracy)
 
-* Services (job queues, cache servers, search engines, etc.)
+Пример: player.assign_distance(match.id, 9)
+        player.assign_accuracy(match.id, 75)
 
-* Deployment instructions
 
-* ...
+2. check_accuracy и check_distance (без параметров)
+
+Реализуют требование: проверить выполнил ли игрок конкретный показатель хотя бы 1 раз за предыдущие 5 матчей команды.
+
+Пример: player.check_accuracy
+        player.check_distance
+
+
+3. snipers_in_team и marathon_runners_in_team (без параметров)
+
+Реализуют требование: выбрать Top-5 игроков по конкретному показателю в конкретной команде.
+
+Пример: player.snipers_in_team
+        player.marathon_runners_in_team
+
+4. self.snipers и self.marathon_runner (без параметров)
+
+Реализуют требование: выбрать Top-5 игроков по конкретному показателю по всем командам в целом.
+
+Пример: Player.snipers
+        Player.marathon_runner

@@ -1,4 +1,6 @@
 class Player < ApplicationRecord
+  validates :name, presence: true
+
   has_many :statistics
   has_many :matches, through: :statistics
   belongs_to :team, optional: true
@@ -20,11 +22,11 @@ class Player < ApplicationRecord
   end
 
   def check_accuracy
-    self.team.statistics.where(player_id: self.id).where("accuracy >= 70").last(5)
+    self.team.statistics.where(player_id: self.id).where("accuracy >= ?", 70).last(5)
   end
 
   def check_distance
-    self.team.statistics.where(player_id: self.id).where("distance >= 10").last(5)
+    self.team.statistics.where(player_id: self.id).where("distance >= ?", 10).last(5)
   end
 
   def assign_distance(match_id, distance)
